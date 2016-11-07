@@ -56,15 +56,19 @@ class ViewController: UIViewController {
     }
     func update_cost(numb: Int){
         
+        var display_string: String = ""
+        
+        cost = 0
+        
+        // store the integer values or decimal values
+        
         if(dec_flag == true && decary.count<2){
             decary.append(numb)
         }else if(dec_flag == false){
             costary.append(numb)
         }
         
-        // make the display string
-        
-        var display_string: String = ""
+        // work out the display string
         
         for n in costary {
              display_string += String(n)
@@ -74,31 +78,26 @@ class ViewController: UIViewController {
             display_string += String(decary[0])
             display_string += String(decary[1])
         }
-
         base_cost.text = "$" + display_string
         
-        // make the maths
+        // calculate the numeric cost
         
-        cost = 0
-
         if (costary.count) == 1 {
             cost += Double(costary[0])
-            print("Single: ", costary.count)
         }
-        
         if (costary.count) > 1 {
-            cost = 0
             var counter = costary.count-1
-            // the last is the ones
             cost = Double(costary[counter])
             counter -= 1
             for idx in 0...costary.count-2 {
-                let factor = pow(Double(10),Double(counter+1))
+                let factor = pow(Double(10), Double(counter + 1))
                 let add_this = Double(costary[idx]) * factor
                 cost += add_this
                 counter -= 1
             }
         }
+        
+        // if decimal places, add them in
         
         if(decary.count == 2){
             var dec = 0.0
@@ -141,7 +140,6 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func percents_action(_ sender: UISlider) {
@@ -152,11 +150,9 @@ class ViewController: UIViewController {
     @IBAction func partysize_action(_ sender: UISlider) {
         partyfactor = floor(Double(sender.value))
         updateUI()
-        print(partyfactor)
     }
     
     @IBAction func calcbtns_action(_ sender: UIButton) {
-        print(sender.tag)
         update_cost(numb: Int(sender.tag))
     }
 
