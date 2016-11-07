@@ -12,18 +12,13 @@ import Foundation
 class ViewController: UIViewController {
     
     @IBOutlet weak var base_cost: UILabel!
-    
     @IBOutlet var percents: [UILabel]!
-    
     @IBOutlet var tip_amounts: [UILabel]!
-    
     @IBOutlet var user_total: [UILabel]!
-    
     @IBOutlet weak var dec_btn: UIButton!
     @IBOutlet var calcbtns: [UIButton]!
     @IBOutlet weak var reset: UIButton!
     @IBOutlet weak var percent_slider: UISlider!
-    
     @IBOutlet weak var partysize_slider: UISlider!
     
     var costary: [Int] = []
