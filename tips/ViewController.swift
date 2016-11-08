@@ -49,6 +49,58 @@ class ViewController: UIViewController {
     @IBAction func dec_btn_action(_ sender: UIButton) {
         dec_flag = true
     }
+    
+    func ary_to_int(ary:[Int], decary:[Int]?) -> Double {
+        // accepts an array of Ints (such as entered by a calculator interface)
+        // and returns the number they represent, as a Double
+        var num = 0.00
+        
+        // work out the integers
+        if (ary.count) == 1 {
+            num += Double(ary[0])
+        }
+        if (ary.count) > 1 {
+            var counter = ary.count-1
+            num = Double(ary[counter])
+            counter -= 1
+            for idx in 0...ary.count-2 {
+                let factor = pow(Double(10), Double(counter + 1))
+                let add_this = Double(costary[idx]) * factor
+                num += add_this
+                counter -= 1
+            }
+        }
+        
+        // check for optional array of the decimals
+        if let decimalary = decary {
+            if(decimalary.count == 2){
+                var dec = 0.0
+                dec += Double(decimalary[1])
+                dec += Double(decimalary[0]) * 10
+                num += (dec/100.0)
+            }
+        }
+        
+        return num
+    }
+    
+    func ary_to_string(ary: [Int], dec: [Int]?) -> String{
+        var new_string: String = ""
+        
+        for n in ary {
+            new_string += String(n)
+        }
+        if let dec = dec{
+            if(dec.count == 2){
+                new_string += "."
+                new_string += String(dec[0])
+                new_string += String(dec[1])
+            }
+        }
+        
+        return new_string
+    }
+    
     func update_cost(numb: Int){
         
         var display_string: String = ""
@@ -56,50 +108,17 @@ class ViewController: UIViewController {
         cost = 0
         
         // store the integer values or decimal values
-        
         if(dec_flag == true && decary.count<2){
             decary.append(numb)
         }else if(dec_flag == false){
             costary.append(numb)
         }
         
-        // work out the display string
-        
-        for n in costary {
-             display_string += String(n)
-        }
-        if(decary.count == 2){
-            display_string += "."
-            display_string += String(decary[0])
-            display_string += String(decary[1])
-        }
-        base_cost.text = "$" + display_string
-        
         // calculate the numeric cost
-        
-        if (costary.count) == 1 {
-            cost += Double(costary[0])
-        }
-        if (costary.count) > 1 {
-            var counter = costary.count-1
-            cost = Double(costary[counter])
-            counter -= 1
-            for idx in 0...costary.count-2 {
-                let factor = pow(Double(10), Double(counter + 1))
-                let add_this = Double(costary[idx]) * factor
-                cost += add_this
-                counter -= 1
-            }
-        }
-        
-        // if decimal places, add them in
-        
-        if(decary.count == 2){
-            var dec = 0.0
-            dec += Double(decary[1])
-            dec += Double(decary[0]) * 10
-            cost += (dec/100.0)
-        }
+        cost = ary_to_int(ary: costary, decary: decary)
+        // generate the string to display
+        display_string = ary_to_string(ary: costary, dec: decary)
+        base_cost.text = "$" + display_string
         
         updateUI()
     }
