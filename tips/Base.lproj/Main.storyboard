@@ -289,6 +289,8 @@
                     <connections>
                         <outlet property="base_cost" destination="J83-5e-nQk" id="dmX-8e-CNB"/>
                         <outlet property="dec_btn" destination="5XO-4Q-ewH" id="yE1-kh-yOl"/>
+                        <outlet property="partysize_slider" destination="iEY-WZ-stC" id="ZuB-3j-6d3"/>
+                        <outlet property="percent_slider" destination="2Be-FQ-9Qa" id="Lpa-KE-Ehj"/>
                         <outlet property="reset" destination="yM7-Bf-Qk0" id="SdU-pC-EIp"/>
                         <outletCollection property="percents" destination="7Wg-lk-q8e" collectionClass="NSMutableArray" id="gik-pM-RHJ"/>
                         <outletCollection property="percents" destination="lyE-0L-9Nr" collectionClass="NSMutableArray" id="9dd-mi-s1L"/>

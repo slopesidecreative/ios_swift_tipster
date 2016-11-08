@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var dec_btn: UIButton!
     @IBOutlet var calcbtns: [UIButton]!
     @IBOutlet weak var reset: UIButton!
+    
     @IBOutlet weak var percent_slider: UISlider!
     @IBOutlet weak var partysize_slider: UISlider!
     
@@ -35,11 +36,9 @@ class ViewController: UIViewController {
         costary = []
         decary = []
         dec_flag =  false
-        
+        percent_slider.setValue(10.0, animated: true)
+        partysize_slider.setValue(1.0, animated: true)
         updateUI()
-        
-//        self.percent_slider.setValue(10.0, animated: true)
-//        self.partysize_slider.setValue(1.0, animated: true)
     }
     
     @IBAction func reset(_ sender: UIButton) {
